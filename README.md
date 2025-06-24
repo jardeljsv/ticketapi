@@ -4,7 +4,7 @@
 Ferramenta Desktop (Python + Tkinter) para criação de chamados em lote no GLPI via API REST, com base em arquivos CSV.
 
 ## Recursos Principais ✅
-- Importação de CSV com Requerente, Título, Descrição, Categoria, Urgência e Tipo
+- Importação de CSV com Requerente, Título, Descrição, Categoria
 - Início / Encerramento de Sessão na API
 - Logs detalhados com barra de progresso
 - Exportação de modelo CSV
