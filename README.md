@@ -17,5 +17,5 @@ Ferramenta Desktop (Python + Tkinter) para criação de chamados em lote no GLPI
 
 ## Instalação de dependências
 ```bash
-pip install -r requirements.txt
+pip install requests
 ****
