@@ -1,4 +1,4 @@
-# ticketapi
+# glpiticketapi
 # GLPI Ticket Batch Creator via CSV 📋➡️🖥️
 
 Ferramenta Desktop (Python + Tkinter) para criação de chamados em lote no GLPI via API REST, com base em arquivos CSV.
