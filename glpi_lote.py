@@ -151,9 +151,9 @@ class GLPIApp:
         self.log("Sessão encerrada")
 
     def gerar_modelo_csv(self):
-        modelo = """id_requerente;titulo;descricao;id_categoria;urgencia;tipo
-12;Problema com impressora;A impressora não está respondendo;15;3;1
-8;Computador lento;O computador está muito lento;12;2;1"""
+        modelo = """id_requerente;titulo;descricao;id_categoria;locations_id
+12;Problema com impressora;A impressora não está respondendo;15;10
+8;Computador lento;O computador está muito lento;12;25"""
         caminho = filedialog.asksaveasfilename(
             defaultextension=".csv",
             filetypes=[("Arquivos CSV", "*.csv")],
@@ -189,7 +189,9 @@ class GLPIApp:
                         try:
                             linha['id_requerente'] = int(linha['id_requerente'])
                             linha['id_categoria'] = int(linha['id_categoria'])
-                        except ValueError:
+                            if 'locations_id' in linha and linha['locations_id']:
+                                linha['locations_id'] = int(linha['locations_id'])
+                        except (ValueError, TypeError):
                             self.log(f"Linha {idx} ignorada: IDs devem ser números")
                             linhas_invalidas += 1
                             continue
@@ -302,12 +304,13 @@ class GLPIApp:
                         "name": linha['titulo'],
                         "content": linha['descricao'],
                         "itilcategories_id": linha['id_categoria'],
-                        "_users_id_requester": linha['id_requerente'],
-                        "urgency": int(linha.get('urgencia', 3)),
-                        "type": int(linha.get('tipo', 1))
+                        "_users_id_requester": linha['id_requerente']
                     }
                 }
                 
+                if 'locations_id' in linha and linha['locations_id']:
+                    payload['input']['locations_id'] = linha['locations_id']
+
                 self.log(f"Criando chamado {idx}/{len(self.csv_data)}: {linha['titulo']}")
                 
                 try:
